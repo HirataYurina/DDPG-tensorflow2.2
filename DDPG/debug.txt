@@ -1,0 +1,9 @@
+DDPG代码不收敛：
+1.soft updating替换hard updating
+2.每步都复制参数
+3.实例化agent时，首先复制参数到model_target，添加initiate方法。
+  如果使用soft updating，这一步十分重要。因为软更新幅度较小，如果初始化时不同步model与target_model
+  之间的参数，那么在相当长的步骤中，model与target_model就是两个完全独立模型，导致模型无法拟合。
+4.action增加高斯noise
+debug：loss函数写错了，broadcast的时候矩阵shape错误。
+深度学习中debug一定要看shape，一般loss容易出错。
